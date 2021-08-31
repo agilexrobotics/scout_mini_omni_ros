@@ -42,8 +42,7 @@ namespace westonrobot
   {
     if (!simulated_robot_)
     {
-      scout_->EnableCommandedMode();
-      scout_->SetMotionCommand(msg->linear.x, msg->linear.y, msg->angular.z);
+        scout_->SetMotionCommand(msg->linear.x, msg->linear.y, msg->angular.z);
     }
     else
     {
