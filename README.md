@@ -87,7 +87,7 @@ Nvidia Jeston TX2/Xavier/XavierNX have CAN controller(s) integrated in the main 
     $ roslaunch scout_mini_omni_bringup scout_robot_base.launch 
     ```
 
-    The [scout_bringup/scout_minimal.launch](scout_mini_omni_bringup/launch/scout_robot_base.launch) has 3 parameters:
+    The [scout_mini_omni_bringup/scout_minimal.launch](scout_mini_omni_bringup/launch/scout_robot_base.launch) has 3 parameters:
 
     - port_name: specifies the port used to communicate with the robot, default = "can0"
     - simulated_robot: indicates if launching with a simulation, default = "false"
