@@ -1,4 +1,4 @@
-# ROS Packages for Scout Mobile Robot
+# ROS Packages for Scout_Mini_Omni Mobile Robot
 
 ## Packages
 
@@ -50,44 +50,55 @@ Nvidia Jeston TX2/Xavier/XavierNX have CAN controller(s) integrated in the main 
 
     ```
     $ cd ~/catkin_ws/src
-    $ git clone --recursive https://github.com/agilexrobotics/ugv_sdk.git  
+    $ git clone https://github.com/agilexrobotics/ugv_sdk.git  
     $ git clone https://github.com/agilexrobotics/scout_ros.git
     $ cd ..
     $ catkin_make
     ```
-    if your car is 1.0 version,Please run this command to switch ugv_sdk to 1.0 version
-    ```
-    $ cd ugv_sdk && git checkout master
-    ```
-    then recompile
+    
+3. Setup CAN-To-USB adapter
 
-3. Launch ROS nodes
+* Enable gs_usb kernel module(If you have already added this module, you do not need to add it)
+    ```
+    $ sudo modprobe gs_usb
+    ```
+    
+* first time use hunter-ros package
+   ```
+   $ rosrun scout_mini_omni_bringup setup_can2usb.bash
+   ```
+   
+* if not the first time use hunter-ros package(Run this command every time you turn off the power) 
+   ```
+   $ rosrun scout_mini_omni_bringup bringup_can2usb.bash
+   ```
+   
+* Testing command
+    ```
+    # receiving data from can0
+    $ candump can0
+    ```
+
+4. Launch ROS nodes
 
 * Start the base node for scout
 
     ```
-    $ roslaunch scout_bringup scout_minimal.launch
+    $ roslaunch scout_mini_omni_bringup scout_robot_base.launch 
     ```
 
-    The [scout_bringup/scout_minimal.launch](scout_bringup/launch/scout_minimal.launch) has 5 parameters:
+    The [scout_bringup/scout_minimal.launch](scout_mini_omni_bringup/launch/scout_robot_base.launch) has 3 parameters:
 
     - port_name: specifies the port used to communicate with the robot, default = "can0"
     - simulated_robot: indicates if launching with a simulation, default = "false"
-    - model_xacro: specifies the target ".xacro" file for the publishing of tf frames, default = [scout_v2.xacro](scout_base/description/scout_v2.xacro)
     - odom_topic_name: sets the name of the topic which calculated odometry is published to, defaults = "odom"
-    - is_scout_mini:Suitable for chassis of type scout_mini,defaults = "false"
 
-* Start the base node for scout-mini
-
-    ```
-    $ roslaunch scout_bringup scout_mini_minimal.launch
-    ```
 
 
 * Start the keyboard tele-op node
 
     ```
-    $ roslaunch scout_bringup scout_teleop_keyboard.launch
+    $ roslaunch scout_mini_omni_bringup scout_teleop_keyboard.launch
     ```
 
     **SAFETY PRECAUSION**: 
