@@ -42,7 +42,7 @@ namespace westonrobot
   {
     if (!simulated_robot_)
     {
-        scout_->SetMotionCommand(msg->linear.x, msg->linear.y, msg->angular.z);
+        scout_->SetMotionCommand(msg->linear.x, msg->angular.z, msg->linear.y);
     }
     else
     {
